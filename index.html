@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Sreeraman T — entry-level Data Analyst portfolio featuring SQL, Python, Excel, and Power BI projects.">
+<title>Sreeraman T — Data Analyst Portfolio</title>
+<style>
+:root {
+  --site-primary: #2458d3;
+  --site-secondary: #e8efff;
+  --site-background: #f5f7fb;
+  --site-on-primary: #ffffff;
+  --site-on-secondary: #173c91;
+  --site-on-background: #182235;
+  --site-font-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --site-font-heading: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --site-heading-scale: 1;
+  --site-spacing-scale: 1;
+  --site-radius-scale: 1;
+  --site-decoration-opacity: 1;
+  --ink: #182235;
+  --muted: #5d687b;
+  --line: #dfe5ef;
+  --surface: #ffffff;
+  --accent-soft: #edf3ff;
+  --green: #17765b;
+  color-scheme: light dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: var(--site-font-body); color: var(--ink); background: var(--site-background); }
+#app { min-height: 100vh; width: 100%; border-radius: 0; background-color: light-dark(var(--site-background), #111827); color: light-dark(var(--site-on-background), #edf2fb); }
+a { color: var(--site-primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+button, a { -webkit-tap-highlight-color: transparent; }
+.container { width: min(1080px, calc(100% - 40px)); margin: 0 auto; }
+.topbar { border-bottom: 1px solid light-dark(var(--line), #293449); background: light-dark(#ffffff, #151e2d); }
+.nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.brand { display: flex; align-items: center; gap: 11px; color: light-dark(var(--ink), #f3f6fc); font-weight: 750; letter-spacing: -.03em; }
+.brand-mark { width: 36px; height: 36px; display: grid; place-items: center; border-radius: calc(11px * var(--site-radius-scale)); color: var(--site-on-primary); background: var(--site-primary); font-size: 14px; letter-spacing: -.04em; }
+.navlinks { display: flex; align-items: center; gap: 26px; font-size: 14px; font-weight: 600; }
+.navlinks a { color: light-dark(#47546a, #c3cede); }
+.navlinks .contact-link { background: var(--site-primary); color: var(--site-on-primary); padding: 10px 15px; border-radius: calc(9px * var(--site-radius-scale)); }
+.hero { padding: calc(84px * var(--site-spacing-scale)) 0 calc(76px * var(--site-spacing-scale)); position: relative; overflow: hidden; }
+.hero-grid { display: grid; grid-template-columns: 1.5fr .8fr; align-items: center; gap: 60px; }
+.eyebrow { display: inline-flex; align-items: center; gap: 9px; color: var(--green); font-size: 12px; text-transform: uppercase; letter-spacing: .13em; font-weight: 800; margin-bottom: 22px; }
+.dot { width: 7px; height: 7px; background: #2da77d; border-radius: 50%; }
+h1, h2, h3, p { margin-top: 0; }
+h1 { font-family: var(--site-font-heading); font-size: calc(clamp(42px, 6vw, 66px) * var(--site-heading-scale)); line-height: 1.04; letter-spacing: -.065em; margin-bottom: 22px; max-width: 700px; }
+.hero h1 span { color: var(--site-primary); }
+.lead { font-size: 18px; line-height: 1.8; color: light-dark(var(--muted), #b4c0d2); max-width: 620px; margin-bottom: 28px; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; border: 1px solid var(--site-primary); padding: 13px 18px; border-radius: calc(10px * var(--site-radius-scale)); font-size: 14px; font-weight: 750; transition: transform .15s ease, background .15s ease; }
+.btn:hover { text-decoration: none; transform: translateY(-1px); }
+.btn.primary { background: var(--site-primary); color: var(--site-on-primary); }
+.btn.secondary { background: light-dark(#fff, #151e2d); color: light-dark(var(--ink), #edf2fb); border-color: light-dark(var(--line), #344158); }
+.profile-card { background: light-dark(var(--surface), #151e2d); border: 1px solid light-dark(var(--line), #293449); border-radius: calc(22px * var(--site-radius-scale)); padding: 27px; box-shadow: 0 18px 45px rgba(25, 46, 85, .06); }
+.profile-initials { width: 66px; height: 66px; display: grid; place-items: center; border-radius: calc(20px * var(--site-radius-scale)); background: var(--site-secondary); color: var(--site-on-secondary); font-size: 22px; font-weight: 850; margin-bottom: 20px; }
+.profile-card h2 { font-size: 20px; letter-spacing: -.03em; margin-bottom: 5px; }
+.profile-card .role { color: var(--site-primary); font-size: 14px; font-weight: 700; margin-bottom: 20px; }
+.profile-detail { border-top: 1px solid light-dark(var(--line), #293449); padding-top: 14px; margin-top: 14px; font-size: 13px; color: light-dark(var(--muted), #b4c0d2); line-height: 1.65; }
+.profile-detail strong { display: block; color: light-dark(var(--ink), #f0f4fc); font-size: 12px; text-transform: uppercase; letter-spacing: .07em; margin-bottom: 3px; }
+.skills-strip { background: light-dark(#ffffff, #151e2d); border-top: 1px solid light-dark(var(--line), #293449); border-bottom: 1px solid light-dark(var(--line), #293449); }
+.skills-row { display: grid; grid-template-columns: repeat(4, 1fr); }
+.skill-item { padding: 22px 18px; border-right: 1px solid light-dark(var(--line), #293449); display: flex; align-items: center; gap: 12px; }
+.skill-item:first-child { border-left: 1px solid light-dark(var(--line), #293449); }
+.skill-icon { width: 38px; height: 38px; display: grid; place-items: center; border-radius: calc(11px * var(--site-radius-scale)); background: var(--site-secondary); color: var(--site-on-secondary); font-size: 12px; font-weight: 850; }
+.skill-item strong { display: block; font-size: 14px; }
+.skill-item small { color: light-dark(var(--muted), #b4c0d2); font-size: 12px; }
+section { padding: calc(78px * var(--site-spacing-scale)) 0; }
+.section-kicker { color: var(--site-primary); text-transform: uppercase; font-size: 12px; letter-spacing: .14em; font-weight: 850; margin-bottom: 12px; }
+.section-title { font-size: calc(34px * var(--site-heading-scale)); line-height: 1.15; letter-spacing: -.045em; margin-bottom: 13px; }
+.section-intro { color: light-dark(var(--muted), #b4c0d2); max-width: 640px; line-height: 1.75; margin-bottom: 32px; }
+.projects-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.project { background: light-dark(var(--surface), #151e2d); border: 1px solid light-dark(var(--line), #293449); border-radius: calc(17px * var(--site-radius-scale)); padding: 25px; display: flex; flex-direction: column; min-height: 280px; }
+.project-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+.project-number { font-size: 12px; font-weight: 800; letter-spacing: .1em; color: light-dark(#8490a3, #8c9bb1); }
+.project-type { background: var(--site-secondary); color: var(--site-on-secondary); border-radius: 99px; padding: 6px 10px; font-size: 11px; font-weight: 800; white-space: nowrap; }
+.project h3 { font-size: 21px; line-height: 1.3; letter-spacing: -.035em; margin-bottom: 10px; }
+.project p { color: light-dark(var(--muted), #b4c0d2); font-size: 14px; line-height: 1.75; margin-bottom: 18px; }
+.report-preview { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; margin: 0 0 18px; padding: 20px; border: 1px solid light-dark(var(--line), #344158); border-radius: 10px; background: light-dark(#f8faff, #111827); }
+.report-preview strong { display: block; margin-bottom: 5px; font-size: 14px; }
+.report-preview span { color: light-dark(var(--muted), #b4c0d2); font-size: 12px; line-height: 1.6; }
+.report-preview .report-icon { flex: 0 0 auto; display: grid; place-items: center; width: 46px; height: 54px; border-radius: 8px; background: var(--site-secondary); color: var(--site-on-secondary); font-size: 12px; font-weight: 850; }
+.tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: auto; margin-bottom: 19px; }
+.tag { border: 1px solid light-dark(var(--line), #344158); border-radius: 6px; padding: 5px 8px; font-size: 11px; color: light-dark(#4c5970, #c3cede); font-weight: 650; }
+.project-link { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 800; align-self: flex-start; }
+.about-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 50px; align-items: start; }
+.about-copy p { color: light-dark(var(--muted), #b4c0d2); line-height: 1.85; }
+.tool-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.tool { padding: 15px; border: 1px solid light-dark(var(--line), #293449); border-radius: calc(11px * var(--site-radius-scale)); background: light-dark(#fff, #151e2d); }
+.tool strong { display: block; font-size: 14px; margin-bottom: 4px; }
+.tool span { color: light-dark(var(--muted), #b4c0d2); font-size: 12px; line-height: 1.5; }
+.education { display: grid; grid-template-columns: 1fr auto; gap: 20px; padding: 23px 0; border-top: 1px solid light-dark(var(--line), #293449); }
+.education h3 { font-size: 16px; margin-bottom: 7px; }
+.education p { color: light-dark(var(--muted), #b4c0d2); font-size: 14px; margin-bottom: 0; line-height: 1.65; }
+.education .year { color: light-dark(var(--muted), #b4c0d2); font-size: 13px; white-space: nowrap; }
+.cert-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+.cert { border: 1px solid light-dark(var(--line), #293449); border-radius: 9px; padding: 11px 13px; background: light-dark(#fff, #151e2d); font-size: 13px; font-weight: 650; }
+.contact-section { background: light-dark(#eaf0fc, #172236); border-top: 1px solid light-dark(#d9e3f6, #293449); }
+.contact-box { display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+.contact-box h2 { font-size: calc(34px * var(--site-heading-scale)); letter-spacing: -.045em; margin-bottom: 12px; }
+.contact-box p { color: light-dark(var(--muted), #b4c0d2); margin-bottom: 0; line-height: 1.7; }
+.footer { padding: 24px 0; background: light-dark(#fff, #151e2d); border-top: 1px solid light-dark(var(--line), #293449); }
+.footer-row { display: flex; justify-content: space-between; align-items: center; gap: 16px; color: light-dark(var(--muted), #b4c0d2); font-size: 12px; }
+.footer-links { display: flex; gap: 18px; }
+.footer-links a { font-weight: 700; }
+.note { margin-top: 18px; font-size: 12px; color: light-dark(#778397, #8c9bb1); line-height: 1.65; }
+@media (max-width: 760px) {
+  .container { width: min(100% - 30px, 600px); }
+  .nav { min-height: 64px; }
+  .navlinks { gap: 13px; font-size: 12px; }
+  .navlinks a:not(.contact-link) { display: none; }
+  .hero { padding: 56px 0; }
+  .hero-grid, .about-grid { grid-template-columns: 1fr; gap: 28px; }
+  .profile-card { max-width: 460px; }
+  .skills-row { grid-template-columns: repeat(2, 1fr); }
+  .skill-item { border-bottom: 1px solid light-dark(var(--line), #293449); padding: 15px 10px; }
+  .skill-item:nth-child(odd) { border-left: 1px solid light-dark(var(--line), #293449); }
+  .skill-item:nth-child(even) { border-right: 1px solid light-dark(var(--line), #293449); }
+  section { padding: 56px 0; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .project { min-height: 0; }
+  .contact-box { align-items: flex-start; flex-direction: column; }
+  .education { grid-template-columns: 1fr; gap: 7px; }
+  .footer-row { align-items: flex-start; flex-direction: column; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; } }
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="Sreeraman T home"><span class="brand-mark">ST</span><span>Sreeraman T</span></a>
+      <nav class="navlinks" aria-label="Main navigation">
+        <a href="#projects">Projects</a><a href="#about">About</a><a href="#education">Education</a><a class="contact-link" href="#contact">Contact me ↗</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow"><span class="dot"></span> Open to entry-level opportunities</div>
+          <h1>Turning data into <span>clearer decisions.</span></h1>
+          <p class="lead">I’m Sreeraman, an aspiring Data Analyst with hands-on project experience in SQL, Python, Excel, and Power BI. I enjoy exploring datasets, finding patterns, and presenting analysis in a clear, practical way.</p>
+          <div class="actions"><a class="btn primary" href="#projects">Explore my projects <span aria-hidden="true">↘</span></a><a class="btn secondary" href="https://github.com/sreeramt25" target="_blank" rel="noreferrer">View GitHub ↗</a></div>
+        </div>
+        <aside class="profile-card" aria-label="Profile summary">
+          <div class="profile-initials">ST</div>
+          <h2>Sreeraman T</h2>
+          <div class="role">Entry-Level Data Analyst</div>
+          <div class="profile-detail"><strong>Core toolkit</strong>SQL · Python · Excel · Power BI</div>
+          <div class="profile-detail"><strong>Target locations</strong>Bengaluru · Chennai</div>
+          <div class="profile-detail"><strong>Education</strong>B.E. Mechanical Engineering · 2023</div>
+        </aside>
+      </div>
+    </section>
+    <div class="skills-strip" aria-label="Core skills">
+      <div class="container skills-row">
+        <div class="skill-item"><span class="skill-icon">SQL</span><div><strong>SQL</strong><small>Queries & analysis</small></div></div>
+        <div class="skill-item"><span class="skill-icon">Py</span><div><strong>Python</strong><small>Pandas & EDA</small></div></div>
+        <div class="skill-item"><span class="skill-icon">XL</span><div><strong>Excel</strong><small>Analysis & reporting</small></div></div>
+        <div class="skill-item"><span class="skill-icon">BI</span><div><strong>Power BI</strong><small>Dashboards & DAX</small></div></div>
+      </div>
+    </div>
+    <section id="projects">
+      <div class="container">
+        <div class="section-kicker">Selected work</div>
+        <h2 class="section-title">Projects that show how I work</h2>
+        <p class="section-intro">A selection of analytics and data projects spanning querying, exploratory analysis, dashboarding, and machine learning. The descriptions focus on the work performed rather than unverified business outcomes.</p>
+        <div class="projects-grid">
+          <article class="project">
+            <div class="project-top"><span class="project-number">PROJECT 01</span><span class="project-type">SQL · Operations</span></div>
+            <h3>Airline Performance Optimization</h3>
+            <p>Queried an airline database to examine booking and passenger details, seat allocation, monthly passenger payments, flight patterns, delays and cancellations, and refund eligibility. The README describes the questions explored; it does not publish quantified findings.</p>
+            <div class="tags"><span class="tag">SQL</span><span class="tag">Window functions</span><span class="tag">Data analysis</span></div>
+            <a class="project-link" href="https://github.com/sreeramt25/Airline-Database-Analysis-SQL" target="_blank" rel="noreferrer">Explore on GitHub <span aria-hidden="true">↗</span></a>
+          </article>
+          <article class="project">
+            <div class="project-top"><span class="project-number">PROJECT 02</span><span class="project-type">Python · EDA</span></div>
+            <h3>Netflix Content Strategy & Trend Analysis</h3>
+            <p>Cleaned and explored Netflix catalogue data with Pandas, NumPy, Matplotlib, and Seaborn. The README reports that movies outnumber TV shows, the United States contributes the largest content volume, and most catalogue additions occurred after 2015.</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Seaborn</span><span class="tag">EDA</span></div>
+            <a class="project-link" href="https://github.com/sreeramt25/netflix-content-analysis-python" target="_blank" rel="noreferrer">Explore on GitHub <span aria-hidden="true">↗</span></a>
+          </article>
+          <article class="project">
+            <div class="project-top"><span class="project-number">PROJECT 03</span><span class="project-type">Power BI · BI</span></div>
+            <h3>Sales Analysis Dashboard</h3>
+            <p>Created a Power BI sales-analysis dashboard using Adventure Works data, with views for total sales, regional sales, and trends over time plus DAX-based KPIs. The repository includes a PDF report but does not quantify business impact.</p>
+            <div class="report-preview"><div><strong>Sales dashboard report</strong><span>Power BI PDF · Open the report in GitHub to view the full dashboard.</span></div><span class="report-icon" aria-hidden="true">PDF</span></div>
+            <div class="tags"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">KPIs</span><span class="tag">Dashboarding</span></div>
+            <div class="actions"><a class="project-link" href="https://github.com/sreeramt25/Sales-Insights-Power-Bi" target="_blank" rel="noreferrer">Explore on GitHub <span aria-hidden="true">↗</span></a><a class="project-link" href="https://github.com/sreeramt25/Sales-Insights-Power-Bi/blob/main/sales_analysis_powerbi.pdf" target="_blank" rel="noreferrer">View PDF report <span aria-hidden="true">↗</span></a></div>
+          </article>
+          <article class="project">
+            <div class="project-top"><span class="project-number">PROJECT 04</span><span class="project-type">Python · ML</span></div>
+            <h3>Credit Card Fraud Detection</h3>
+            <p>Compared Logistic Regression and Random Forest for imbalanced fraud data, using cost-based threshold tuning and ROC/precision–recall evaluation. The README reports model-evaluation costs of ₹1,22,300 for Random Forest and ₹1,33,700 for Logistic Regression; these are project results, not verified real-world savings.</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Scikit-learn</span><span class="tag">Classification</span></div>
+            <a class="project-link" href="https://github.com/sreeramt25/credit-card-fraud-detection-ml" target="_blank" rel="noreferrer">Explore on GitHub <span aria-hidden="true">↗</span></a>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section id="about" style="background: light-dark(#edf2fa, #121b2a); border-top: 1px solid light-dark(var(--line), #293449); border-bottom: 1px solid light-dark(var(--line), #293449);">
+      <div class="container about-grid">
+        <div class="about-copy">
+          <div class="section-kicker">About me</div>
+          <h2 class="section-title">Curious by nature.<br>Structured in approach.</h2>
+          <p>I’m a 2023 B.E. Mechanical Engineering graduate transitioning into data analytics. Through guided learning and independent projects, I’ve developed practical skills in querying, preparing, exploring, and visualizing data.</p>
+          <p>I’m looking for an entry-level role where I can contribute with SQL, Python, Excel, and Power BI, learn from an experienced team, and grow through real analytical problems.</p>
+        </div>
+        <div>
+          <div class="section-kicker">Tools & techniques</div>
+          <div class="tool-list">
+            <div class="tool"><strong>SQL</strong><span>Joins, analytical queries, window functions</span></div>
+            <div class="tool"><strong>Python</strong><span>Pandas, NumPy, Matplotlib, Seaborn</span></div>
+            <div class="tool"><strong>Power BI</strong><span>Dashboards, KPI reporting, DAX</span></div>
+            <div class="tool"><strong>Data analysis</strong><span>Cleaning, validation, EDA, interpretation</span></div>
+            <div class="tool"><strong>Excel</strong><span>Data analysis and reporting workflows</span></div>
+            <div class="tool"><strong>Machine learning</strong><span>Scikit-learn fundamentals, model evaluation</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="education">
+      <div class="container">
+        <div class="section-kicker">Background</div>
+        <h2 class="section-title">Education & certifications</h2>
+        <div class="education"><div><h3>B.E. Mechanical Engineering</h3><p>K. Ramakrishnan College of Technology</p><p>CGPA: 7.9</p></div><div class="year">2019–2023</div></div>
+        <div class="cert-list"><div class="cert">Google Professional Data Analytics Certificate</div><div class="cert">Professional Data Analytics Certification — Skillovilla</div><div class="cert">Advanced SQL Certification — HackerRank</div></div>
+      </div>
+    </section>
+    <section class="contact-section" id="contact">
+      <div class="container contact-box">
+        <div><div class="section-kicker">Let’s connect</div><h2>Have an entry-level analytics opportunity?</h2><p>I’m open to Data Analyst, SQL Analyst, BI Analyst, and Reporting Analyst opportunities in Bengaluru and Chennai.</p></div>
+        <div class="actions"><a class="btn primary" href="mailto:sreeramt25@gmail.com">Email me ↗</a><a class="btn secondary" href="https://www.linkedin.com/in/sreeraman-t/" target="_blank" rel="noreferrer">LinkedIn ↗</a></div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer"><div class="container footer-row"><span>© <span id="year">2026</span> Sreeraman T · Data Analyst Portfolio</span><div class="footer-links"><a href="https://github.com/sreeramt25" target="_blank" rel="noreferrer">GitHub</a><a href="https://www.linkedin.com/in/sreeraman-t/" target="_blank" rel="noreferrer">LinkedIn</a><a href="mailto:sreeramt25@gmail.com">Email</a></div></div></footer>
+</div>
+<script>
+(function () {
+  const year = document.getElementById('year');
+  if (year) year.textContent = String(new Date().getFullYear());
+})();
+</script>
+</body>
+</html>
